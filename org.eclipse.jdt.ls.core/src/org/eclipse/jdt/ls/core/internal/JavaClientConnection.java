@@ -77,7 +77,7 @@ public class JavaClientConnection {
 	}
 
 	private final LogHandler logHandler;
-	private final JavaLanguageClient client;
+	final JavaLanguageClient client;
 
 	public JavaClientConnection(JavaLanguageClient client) {
 		this.client = client;
@@ -223,4 +223,10 @@ public class JavaClientConnection {
 		}
 	}
 
+	public void telemetryEvent(Object object) {
+		if (JavaLanguageServerPlugin.getPreferencesManager() != null
+			&& JavaLanguageServerPlugin.getPreferencesManager().getPreferences().isTelemetryEnabled()) {
+			client.telemetryEvent(object);
+		}
+	}
 }
